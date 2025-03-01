@@ -1,0 +1,48 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App input {
+  width: 220px;
+  height: 25px;
+}
+
+.App button {
+  width: 100px;
+  height: 30px;
+}
+
+.block {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid green;
+  width: 300px;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.x {
+  background-color: red;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+  border-radius: 10px;
+}
+
+.blockName {
+  display: flex;
+
+}
+
+.blockName  input{
+  width: 15px;
+  height: 15px;
+  
+}
+
+.lineName {
+  text-decoration: line-through;
+}
