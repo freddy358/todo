@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Card } from "./Components/Card";
-import { User } from "./Components/Users";
+import { Todo } from "./Components/Todo";
 
 const App = () => {
   const [inputValue, setInputValue] = useState("");
+  const [editedId, setEditedId] = useState(null);
+  const [editedValue, setEditedValue] = useState("");
   const [todoList, setTodoList] = useState([
     { id: 1, name: "Read book", checked: false },
     { id: 2, name: "Never get down", checked: false },
@@ -42,6 +43,24 @@ const App = () => {
     setTodoList(checkArr);
   };
 
+  const changeName = (id) => {
+    const checkArr = todoList.map((el) => {
+      if (el.id === id) {
+        el.name = editedValue;
+      }
+
+      return el;
+    });
+
+    setTodoList(checkArr);
+    setEditedId(null);
+  };
+
+  const editHandler = (id, name) => {
+    setEditedId(id);
+    setEditedValue(name);
+  };
+
   return (
     <div className="App">
       <div>
@@ -53,19 +72,20 @@ const App = () => {
         <button onClick={addHandler}>Add</button>
       </div>
       {todoList.map((i) => (
-        <div className="block">
-          <div className="blockName">
-            <input
-              type="checkbox"
-              checked={i.checked}
-              onChange={() => checkHandler(i.id)}
-            />
-            <div className={i.checked ? "lineName" : ""}>{i.name}</div>
-          </div>
-          <div className="x" onClick={() => deleteHandler(i.id)}>
-            x
-          </div>
-        </div>
+        // eslint-disable-next-line react/jsx-key
+        <Todo
+        key={i.id}
+          id={i.id}
+          name={i.name}
+          editedId={editedId}
+          editedValue={editedValue}
+          setEditedValue={setEditedValue}
+          changeName={changeName}
+          checked={i.checked}
+          checkHandler={checkHandler}
+          editHandler={editHandler}
+          deleteHandler={deleteHandler}
+        />
       ))}
     </div>
   );
